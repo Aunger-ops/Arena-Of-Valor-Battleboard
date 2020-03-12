@@ -1,0 +1,158 @@
+html{
+	background:#2F3545;
+	color:#FFF;
+	font:12px sans-serif;
+}
+body,h2,p{
+	margin:0;
+}
+.avatar{
+	top:-5px;
+	left:10px;
+	width:106px;
+	height:120px;
+	display:block;
+	position:absolute;
+	/*background-position:-110px -174px;*/
+}
+.level{display:block;border:0;border-radius:2px 2px 2px 2px;}
+.king-box{
+	overflow: hidden;	
+	.head{
+		padding:10px;
+		.user-link{
+			font-size:24px;
+			line-height:36px;
+			img{
+				width: 36px;
+				height: 36px;
+				border-radius:2px;
+				vertical-align:top;
+				margin-right:10px;
+			}
+		}
+		.level{
+			float:right;
+  			-webkit-transition: background-size 1s;
+  			transition: background-size 1s; 
+			height: 36px;
+		}
+	}
+	.num-box{
+		margin:0 -30px 0 0;
+		list-style-type: none;
+		padding:5px 0 5px 5px;
+		overflow: hidden;
+		background:#111;
+		text-shadow:0 1px 0 #000;
+		li{
+			float:left;
+			padding:5px 10px;
+			margin-right:10px;
+			&:last-child{
+				margin-right:0;
+				padding-right:0;
+			}
+			span{
+				display:block;
+				font-size:24px;
+				line-height: 28px;
+				font-weight:100;
+			}
+			b{
+				display:block;
+				font-style:12px;
+				line-height:18px;
+				font-weight:200;
+				color:#8A9EA7;
+
+			}
+		}
+	}
+	.last-round-box{
+		position: relative;
+		text-align: right;
+		padding:10px 17px;
+		h2{
+			font-size:12px;
+			line-height:22px;
+			font-weight:200;
+			color:#8A9EA7;
+			background:#111;
+			position: absolute;
+			top:15px;
+			left:50%;
+			padding:0 7px;
+			border-radius:2px;
+			margin-left:-43px;
+
+		}
+		p{
+			&.kd-value{
+				font-size:21px;
+				line-height:34px;
+				font-weight:200;
+				&:before{
+					content:'KDA ';
+				}
+			}
+			&.score-value,
+			&.stat-value{
+				line-height:14px;
+				padding:4px 0;
+				color:#8A9EA7;
+				span{
+					display:inline-block;
+					&:after{
+						content:'|';
+						display:inline-block;
+						padding:0 10px;
+						opacity:.5;
+					}
+					&:last-child{
+						&:after{
+							content:none;
+						}
+					}
+				}
+			}
+			
+		}
+		img{
+			height:86px;
+			position: absolute;
+			top:0;
+			left:10px;
+		}
+	}
+	.cp{
+		position: absolute;
+		left:0;
+		bottom:0;
+		margin:4px;
+		font-size:12px;
+		line-height:12px;
+		color:#8A9EA7;
+		transform:scale(.8);
+		opacity:.5;
+	}
+}
+
+
+@media (max-width:400px) {
+	.king-box{
+		.num-box{
+			li{
+				padding:5px;
+				margin-right:10px;
+			}
+		}
+	}
+}
+@media (max-width:320px) {
+	.king-box{
+		.num-box{
+			zoom:.95;
+		}
+	}
+}
