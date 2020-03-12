@@ -23,3 +23,8 @@
 2. 若此程序危害了您的利益，请联系笔者删除。Email : anjiejo「AT」qq.com
 3. 若您有很好的建设性意见，欢迎在留言处提出。
 
+## 预览
+
+宽度自适应，特殊宽度有特殊处理
+
+![  王者荣耀战绩板 ](https://cdn.jsdelivr.net/gh/Aunger-ops/myblog@latest/images/2020/12/2.png " 王者荣耀战绩板")
