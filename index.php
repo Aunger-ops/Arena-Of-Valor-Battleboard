@@ -1,9 +1,9 @@
 <?php
 error_reporting(0);
-$roleid = "roleid"; //需要获取
-$partition = "321"; //需要获取
-$area = "321"; //需要获取
-$appid = "wx95a3a4d7c627e07d";
+$roleid = ""; //需要获取
+$partition = ""; //需要获取
+$area = ""; //需要获取
+$appid = "";//需要获取
 $url = "https://mapps.game.qq.com/yxzj/web201605/GetHeroSkin.php?appid=" . $appid . "&area=" . $area . "&partition=" . $partition . "&roleid=" . $roleid . "&r=0." . rand(100000000000000, 999999999999999);
 $rank = "1"; //初始化段位为青铜三
 $ch1 = curl_init();
@@ -17,7 +17,7 @@ curl_setopt_array($ch1, array(
 	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 	CURLOPT_CUSTOMREQUEST => "GET",
 	CURLOPT_HTTPHEADER => array(
-		"Cookie: 1234", //需要获取
+		"Cookie: ", //需要获取
 		"Referer: https://pvp.qq.com/web201605/personal.shtml",
 	),
 ));
@@ -25,17 +25,24 @@ $response = curl_exec($ch1);
 curl_close($ch1);
 $response = str_replace("var GetHeroSkinResult = ", "", $response);
 $result = json_decode($response, true);
-$result = $result['data'];
-$rank = $result['idip_info']['grade_level']; //段位
-$nick = urldecode($result['idip_info']['charac_name']); //昵称
+
+if($result['iRet']!="-12"){
+$res = $result['data'];
+}else{
+	$myfile = fopen("king_data.txt", "r") or die("Please do your first authorization.");
+	$res = fread($myfile, filesize("king_data.txt"));
+	$res = json_decode($res, true);
+	
+	fclose($myfile);
+}
+$rank = $res['idip_info']['grade_level']; //段位
+$nick = urldecode($res['idip_info']['charac_name']); //昵称
 $rankimg = "http://game.gtimg.cn/images/yxzj/web201605/page/rank" . $rank . ".png"; //段位图片
-$headimg = urldecode($result['idip_info']['head_url']) . "/96"; //头像,96为头像大小
-$fvf_win = $result['history']['five_vs_five_win_num']; //5v5胜场
-$ladder_win = $result['history']['ladder_win_num']; //排位胜场
-$fvf_rate = ($fvf_win / ($fvf_win + $result['history']['five_vs_five_lose_num'])) * 100; //5v5胜率
-$ladder_rate = ($ladder_win / ($ladder_win + $result['history']['ladder_lose_num'])) * 100; //排位胜率
-?>
-<?php
+$headimg = urldecode($res['idip_info']['head_url']) . "/96"; //头像,96为头像大小
+$fvf_win = $res['history']['five_vs_five_win_num']; //5v5胜场
+$ladder_win = $res['history']['ladder_win_num']; //排位胜场
+$fvf_rate = ($fvf_win / ($fvf_win + $res['history']['five_vs_five_lose_num'])) * 100; //5v5胜率
+$ladder_rate = ($ladder_win / ($ladder_win + $res['history']['ladder_lose_num'])) * 100; //排位胜率
 
 $curl = curl_init();
 
@@ -49,22 +56,33 @@ curl_setopt_array($curl, array(
 	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 	CURLOPT_CUSTOMREQUEST => "GET",
 	CURLOPT_HTTPHEADER => array(
-		"Cookie: 1234", //需要获取
+		"Cookie: ", //需要获取
 		"Referer: https://pvp.qq.com/web201605/personal.shtml",
 	),
 ));
 
 $response = curl_exec($curl);
-
 curl_close($curl);
 $response = str_replace("var result = ", "", $response);
 $result = json_decode($response, true);
-$result = $result['data']['spider'];
+if($result['iRet']!="-12"){
+	$result = $result['data']['spider'];
+}else{
+	$myfile = fopen("king_data.txt", "r") or die("Please do your first authorization.");
+	$result = fread($myfile, filesize("king_data.txt"));
+	$result = json_decode($result, true);
+	fclose($myfile);
+}
+
 $kda = $result['kda']; //KDA
 $survive = $result['survive']; //生存
 $battle = $result['battle']; //团战
 $grow = $result['grow']; //发育
 $hurt_hero = $result['hurt_hero']; //输出
+$arr_meg=array_merge($result,$res);
+if($result!=null && $res!=null){
+file_put_contents('king_data.txt', print_r(json_encode($arr_meg), true));
+}
 ?>
 <meta name="viewport" content="width=device-width,user-scalable=0">
 <link rel="stylesheet/less" href="./static/less/king.css">
@@ -104,4 +122,4 @@ $hurt_hero = $result['hurt_hero']; //输出
       <span>发育 <?php echo round($grow * 100 / 10000, 0); ?> %</span>
       <span>生存 <?php echo round($survive * 100 / 10000, 0); ?> %</span></p>
     <img src="<?php echo $rankimg; ?>"></div>
-  <span class="cp" title="引用 PVP Tencent 的数据">©PVP Tencent</span></div>
+  <span class="cp" title="引用 PVP Tencent 的数据">©PVP Tencent Power By <a href="https://www.webaun.cn" style="color:white;" target="_blank">Aunger</a></span></div>
