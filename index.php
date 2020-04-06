@@ -4,7 +4,7 @@ $roleid    = ""; //需要获取
 $partition = ""; //需要获取
 $area      = "3"; //需要获取
 $appid     = ""; //需要获取
-$cookie    = ""; //需要获取
+$cookie    = "Cookie: "; //需要获取,在cookie后追加，不可改动“Cookie: ”
 $url       = "https://mapps.game.qq.com/yxzj/web201605/GetHeroSkin.php?appid=" . $appid . "&area=" . $area . "&partition=" . $partition . "&roleid=" . $roleid . "&r=0." . rand(100000000000000, 999999999999999);
 $rank      = "1"; //初始化段位为青铜三
 $ch1       = curl_init();
@@ -18,7 +18,8 @@ curl_setopt_array($ch1, array(
     CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST  => "GET",
     CURLOPT_HTTPHEADER     => array(
-        "Cookie: " . $cookie,
+        "referer: https://pvp.qq.com/web201605/personal.shtml",
+        $cookie,
     ),
 ));
 $response = curl_exec($ch1);
@@ -56,7 +57,8 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST  => "GET",
     CURLOPT_HTTPHEADER     => array(
-        "Cookie: " . $cookie,
+        "referer: https://pvp.qq.com/web201605/personal.shtml",
+        $cookie,
     ),
 ));
 
