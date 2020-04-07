@@ -23,6 +23,7 @@
 2. 若此程序危害了您的利益，请联系笔者删除。Email : anjiejo「AT」qq.com
 3. 若您有很好的建设性意见，欢迎在留言处提出。
 4. 更多更新动向，请关注：https://www.webaun.cn
+5. 感谢[卜卜口](http://mouto.org/ "卜卜口")给予UI授权。
 
 ## 预览
 
